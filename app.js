@@ -13,3 +13,4 @@ app.use('/', rootRoute);
 app.use('/cat', catRoute);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
