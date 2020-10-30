@@ -17,3 +17,5 @@ const users = [
 module.exports = {
   users,
 };
+
+//SELECT user_id, name FROM wop_user
