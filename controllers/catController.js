@@ -16,7 +16,7 @@ const cat_get_by_id = async (req, res) => {
 };
 
 const cat_create = async (req, res) => {
-  //here we will create a cat with data comming from req...
+  //here we will create a cat with data coming from req...
   console.log("catController cat_create", req.body, req.file);
   const id = await catModel.insertCat(req);
   const cat = await catModel.getCat(id);
