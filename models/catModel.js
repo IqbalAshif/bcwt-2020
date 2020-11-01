@@ -55,8 +55,14 @@ const updateCat = async (id, req) => {
     const [
       rows,
     ] = await promisePool.query(
-      "UPDATE wop_cat SET name = ?, age = ?, weight = ?, owner =? WHERE cat_id = ?;",
-      [req.body.name, req.body.age, req.body.weight, req.body.owner, id]
+      "UPDATE wop_cat SET name = ?, age = ?, weight = ?, owner =? WHERE cat_id = ?",
+      [
+        req.body.name,
+        req.body.age,
+        req.body.weight,
+        req.body.owner,
+        req.body.id,
+      ]
     );
     console.log("catModel update:", rows);
     return rows.affectedRows === 1;
@@ -65,7 +71,6 @@ const updateCat = async (id, req) => {
   }
 };
 
-//delete function, no return needed. just best effort
 const deleteCat = async (id) => {
   try {
     const [

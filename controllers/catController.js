@@ -1,5 +1,6 @@
 // Controller
 "use strict";
+const { deleteCat } = require("../models/catModel");
 const catModel = require("../models/catModel");
 
 const cats = catModel.cats;
@@ -23,19 +24,20 @@ const cat_create = async (req, res) => {
   res.send(cat);
 };
 
-const cat_update = async (req, res) => {
-  const updateOk = await catModel.updateCat(req.params.id, req)
-  res.send(`updated...${updateOk}`);
+const cat_update_put  = async (req, res) => {
+  const updateOk = await catModel.updateCat(req.body);
+  res.send(updateOk);
 };
 
 const cat_delete = async (req, res) => {
-  res.send('deleted..');
+  const deleteOk = await catModel.deleteCat(req.params.id);
+  res.json(deleteOk);
 };
 
 module.exports = {
   cat_list_get,
   cat_get_by_id,
   cat_create,
-  cat_update,
+  cat_update_put,
   cat_delete,
 };
