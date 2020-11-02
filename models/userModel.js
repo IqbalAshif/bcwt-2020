@@ -4,7 +4,7 @@ const promisePool = pool.promise();
 
 const getAllUsers = async () => {
   try {
-    const [rows] = await promisePool.query("SELECT wop_user.user_id, wop_user.name, wop_user.email FROM wop_user");
+    const [rows] = await promisePool.execute("SELECT wop_user.user_id, wop_user.name, wop_user.email FROM wop_user");
     return rows;
   } catch (e) {
     console.error("userModel:", e.message);
@@ -23,7 +23,7 @@ const getUser = async (id) => {
 
 const addUser = async (req) => {
   try {
-    const [rows] = await promisePool.query('INSERT INTO wop_user (name, email, password) VALUES (?, ?, ?);',
+    const [rows] = await promisePool.execute('INSERT INTO wop_user (name, email, password) VALUES (?, ?, ?);',
       [req.body.name, req.body.email, req.body.passwd]);
     console.log('userModel insert:', rows);
     return rows.insertId;

@@ -4,7 +4,7 @@ const promisePool = pool.promise();
 
 const getAllCats = async () => {
   try {
-    const [rows] = await promisePool.query(
+    const [rows] = await promisePool.execute(
       'Select wop_cat.*, wop_user.name as owner_name FROM wop_cat LEFT JOIN wop_user ON wop_cat.owner = wop_user.user_id'
     );
     return rows;
@@ -32,7 +32,7 @@ const insertCat = async (req) => {
   try {
     const [
       rows,
-    ] = await promisePool.query(
+    ] = await promisePool.execute(
       'INSERT INTO wop_cat (name, age, weight, owner, filename) VALUES (?, ?, ?, ?, ?);',
       [
         req.body.name,
@@ -50,20 +50,18 @@ const insertCat = async (req) => {
   }
 };
 
-const updateCat = async (id, req) => {
+const updateCat = async (req) => {
   try {
-    const [
-      rows,
-    ] = await promisePool.query(
-      'UPDATE wop_cat SET name = ?, age = ?, weight = ?, owner =? WHERE cat_id = ?;',
-      [req.body.name, req.body.age, req.body.weight, req.body.owner, id]
-    );
+    console.log(req.body);
+    const [rows] = await promisePool.execute('UPDATE wop_cat SET name = ?, age = ?, weight = ?, owner = ? WHERE cat_id = ?;',
+    [req.body.name, req.body.age, req.body.weight, req.body.owner, req.body.id]);
     console.log('catModel update:', rows);
     return rows.affectedRows === 1;
   } catch (e) {
     return false;
   }
 };
+
 
 const deleteCat = async (id) => {
   try {
