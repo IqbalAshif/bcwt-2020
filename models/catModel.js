@@ -55,14 +55,8 @@ const updateCat = async (id, req) => {
     const [
       rows,
     ] = await promisePool.query(
-      "UPDATE wop_cat SET name = ?, age = ?, weight = ?, owner =? WHERE cat_id = ?",
-      [
-        req.body.name,
-        req.body.age,
-        req.body.weight,
-        req.body.owner,
-        req.body.id,
-      ]
+      "UPDATE wop_cat SET name = ?, age = ?, weight = ?, owner =? WHERE cat_id = ?;",
+      [req.body.name, req.body.age, req.body.weight, req.body.owner, id]
     );
     console.log("catModel update:", rows);
     return rows.affectedRows === 1;
