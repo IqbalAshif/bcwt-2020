@@ -1,7 +1,7 @@
 'use strict';
 // catRoute
 const express = require('express');
-const { body, sanitizeBody } = require('express-validator');
+const { body } = require('express-validator');
 const multer = require('multer');
 const catController = require('../controllers/catController');
 const router = express.Router();
@@ -37,10 +37,20 @@ router.post(
     body('owner', 'required').isLength({ min: 1 }).isNumeric(),
     body('type', 'not image').contains('image'),
   ],
-  catController.cat_create
-);
+  catController.cat_create);
+
 router.get('/:id', catController.cat_get_by_id);
-router.put('/', catController.cat_update_put);
+
+router.put('/',
+    [
+      body('name', 'cannot be empty').isLength({min: 1}),
+      body('age', 'must be a number').isLength({min: 1}).isNumeric(),
+      body('weight', 'must be a number').isLength({min: 1}).isNumeric(),
+      body('owner', 'required').isLength({min: 1}).isNumeric(),
+    ],
+    catController.cat_update_put);
+
+
 router.delete('/:id', catController.cat_delete);
 
 module.exports = router;

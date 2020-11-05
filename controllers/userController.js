@@ -22,7 +22,7 @@ const user_create = async (req, res) => {
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
   }
- // const id = await userModel.addUser(req);
+  const id = await userModel.addUser(req);
   const user = await userModel.getUser(id);
   res.send(user);
 };

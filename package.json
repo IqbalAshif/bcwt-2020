@@ -17,5 +17,7 @@
     "mysql2": "^2.2.5",
     "validator": "^13.1.17"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "kill-port": "^1.6.1"
+  }
 }
