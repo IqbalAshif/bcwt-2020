@@ -4,7 +4,7 @@ const promisePool = pool.promise();
 
 const getAllCats = async () => {
   try {
-    const [rows] = await promisePool.execute(`SELECT cat_id, wop_cat.name, age, weight, owner, filename, user_id, wop_user.name 
+    const [rows] = await promisePool.execute(`SELECT cat_id, wop_cat.name, age, weight, owner, filename, user_id, coords, wop_user.name 
     AS ownername FROM wop_cat LEFT JOIN wop_user ON owner = user_id`
     );
     return rows;
@@ -28,18 +28,19 @@ const getCat = async (id) => {
   }
 };
 
-const insertCat = async (req) => {
+const insertCat = async (req, coords) => {
   try {
     const [
       rows,
     ] = await promisePool.execute(
-      'INSERT INTO wop_cat (name, age, weight, owner, filename) VALUES (?, ?, ?, ?, ?);',
+      'INSERT INTO wop_cat (name, age, weight, owner, filename, coords) VALUES (?, ?, ?, ?, ?, ?);',
       [
         req.body.name,
         req.body.age,
         req.body.weight,
         req.body.owner,
         req.file.filename,
+        req.body.coords,
       ]
     );
     console.log('catModel insert:', rows);
