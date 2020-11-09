@@ -1,5 +1,5 @@
 'use strict';
-const ExifImage = require('exif').ExifImage;
+const { ExifImage } = require('exif');
 
 const getCoordinates = (imgFile) => {
   // imgFile = full path to uploaded image
@@ -12,17 +12,13 @@ const getCoordinates = (imgFile) => {
           reject(error);
         } else {
           console.log('Exif data', exifData); // Do something with your data!
-
           // coordinates below should be an array of GPS coordinates in decimal format: [longitude, latitude]
           const coordinates = [
             gpsToDecimal(
               exifData.gps.GPSLongitude,
               exifData.gps.GPSLongitudeRef
             ),
-            gpsToDecimal(
-              exifData.gps.GPSLatttitude,
-              exifData.gps.GPSLatttitudeRef
-            ),
+            gpsToDecimal(exifData.gps.GPSLatitude, exifData.gps.GPSLatitudeRef),
           ];
           resolve(coordinates);
         }

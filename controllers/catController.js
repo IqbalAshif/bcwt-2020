@@ -3,7 +3,7 @@
 const catModel = require('../models/catModel');
 const { validationResult } = require('express-validator');
 const { makeThumbnail } = require('../utils/resize');
-const {getCoordinates} = require('../utils/imageMeta');
+const { getCoordinates } = require('../utils/imageMeta');
 
 const cats = catModel.cats;
 
@@ -51,7 +51,6 @@ const cat_create = async (req, res) => {
   const id = await catModel.insertCat(req);
   const cat = await catModel.getCat(id);
   res.send(cat);
-  
 };
 
 const cat_update_put = async (req, res) => {
