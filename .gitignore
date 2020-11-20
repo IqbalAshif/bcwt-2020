@@ -199,6 +199,5 @@ $RECYCLE.BIN/
 *.pem
 
 week2_public_html
-node_modules
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,node,linux,windows,osx
