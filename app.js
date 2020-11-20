@@ -12,8 +12,7 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('uploads'));
-app.use('/thumbnails', express.static('thumbnails'));
+
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 if (process.env.NODE_ENV === 'production') {
@@ -21,7 +20,8 @@ if (process.env.NODE_ENV === 'production') {
 } else {
   require('./localhost')(app, process.env.HTTPS_PORT, process.env.HTTP_PORT);
 }
-
+app.use(express.static('uploads'));
+app.use('/thumbnails', express.static('thumbnails'));
 
 //routes
 app.use('/', rootRoute);
