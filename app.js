@@ -21,6 +21,7 @@ if (process.env.NODE_ENV === 'production') {
   require('./localhost')(app, process.env.HTTPS_PORT, process.env.HTTP_PORT);
 }
 app.use(express.static('uploads'));
+app.use(express.static('week2_public_html'));
 app.use('/thumbnails', express.static('thumbnails'));
 
 //routes
