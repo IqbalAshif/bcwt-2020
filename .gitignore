@@ -197,4 +197,7 @@ $RECYCLE.BIN/
 
 *.pem
 *.csr
+
+week2_public_html
+
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,node,linux,windows,osx
